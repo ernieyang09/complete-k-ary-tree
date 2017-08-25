@@ -1,11 +1,13 @@
 {
   "name": "complete-k-ary-tree",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A complete k-ary tree is a k-ary tree which is maximally space efficient. It must be completely filled on every level except for the last level. However, if the last level is not complete, then all nodes of the tree must be \"as far left as possible\".",
-  "main": "index.js",
+  "main": "distribution/index.js",
   "scripts": {
-    "test": "babel-node --presets es2015 test.js",
-    "start": "babel-node --presets es2015 index.js"
+    "test": "babel-node source/test.js",
+    "start": "babel-node source/index.js",
+    "build": "babel source --out-dir distribution",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -25,9 +27,11 @@
     "assert": "^1.4.1",
     "async": "^2.5.0",
     "async-foreach": "^0.1.3",
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
     "singly-linked-list": "^0.2.7",
     "symbol-tree": "^3.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-stage-0": "^6.24.1"
   }
 }
