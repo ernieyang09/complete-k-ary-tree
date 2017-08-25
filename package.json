@@ -1,0 +1,24 @@
+{
+  "name": "complete-k-ary-tree",
+  "version": "1.0.0",
+  "description": "A complete k-ary tree is a k-ary tree which is maximally space efficient. It must be completely filled on every level except for the last level. However, if the last level is not complete, then all nodes of the tree must be \"as far left as possible\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node --presets es2015 index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjk543/complete-k-ary-tree.git"
+  },
+  "keywords": [
+    "k-ary",
+    "tree"
+  ],
+  "author": "bjk543",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjk543/complete-k-ary-tree/issues"
+  },
+  "homepage": "https://github.com/bjk543/complete-k-ary-tree#readme"
+}
