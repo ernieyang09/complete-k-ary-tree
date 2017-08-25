@@ -1,10 +1,10 @@
 # complete-k-ary-tree
-
+<pre>
 https://www.cs.auckland.ac.nz/software/AlgAnim/n_ary_trees.html
 n-ary trees (or n-way trees)
 Trees in which each node may have up to n children.
 https://en.wikipedia.org/wiki/K-ary_tree
-
+</pre>
 # IsParent=floor.((i-1)/k)
 
 # pls see source/test.js
