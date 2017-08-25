@@ -9,6 +9,7 @@ https://en.wikipedia.org/wiki/K-ary_tree
 
 # pls see source/test.js
 
+<pre>
 [ { parent: 'prependChild', key: 'SyzeD3MHK_Z', depth: 0, index: 0 },
   { parent: 'SyzeD3MHK_Z', key: 'BkmD3MHKuZ', depth: 1, index: 1 },
   { parent: 'SyzeD3MHK_Z', key: 'BkWxPhMHF_b', depth: 1, index: 2 },
@@ -29,3 +30,4 @@ https://en.wikipedia.org/wiki/K-ary_tree
   { parent: 'SyzeD3MHK_Z', key: 'SytD2MBKuZ', depth: 1, index: 8 },
   { parent: 'SytD2MBKuZ', key: 'rJdP3zHt_b', depth: 2, index: 65 },
   { parent: 'rJdP3zHt_b', key: 'SJPw3zBYuW', depth: 3, index: 521 } ]
+</pre>
