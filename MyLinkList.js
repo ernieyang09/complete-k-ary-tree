@@ -1,5 +1,3 @@
-
-
 import LinkedList from 'singly-linked-list';
 
 export default class MyLinkList {
@@ -8,15 +6,16 @@ export default class MyLinkList {
   }
 
   async insert(value) {
-        // console.log(list.find(value)==-1);
-    if (this.list.find(value) === -1) {
+    if (this.list.find(value) == -1) {
       return this.list.insert(value);
     }
   }
 
   async finish(arr) {
-    for (let i = 0; i < arr.length; i += 1) {
-      if (!arr[i].use) { return false; }
+    for (let i = 0; i < arr.length; i++) {
+      if (!arr[i].use) {
+        return false;
+      }
     }
   }
 
