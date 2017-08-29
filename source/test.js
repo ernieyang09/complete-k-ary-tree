@@ -3,15 +3,17 @@ import assert from 'assert';
 
  function testMain() {
   console.log('step0');
-  const myTree = new MultiNodeTree();
   const root = 'root';
+  const myTree = new MultiNodeTree(root);
+  console.log(myTree)
+return;
   const child1 = 'child1';
   const child2 = 'child2';
   const grandChild11 = 'grandChild11';
   const grandChild12 = 'grandChild12';
   const grandChild21 = 'grandChild21';
   const grandChild22 = 'grandChild22';
-  myTree.setRoot(root);
+
   // assert.deepEqual( myTree.getSize(), 1);
   myTree.addChild(root, child1);
   // assert.deepEqual( myTree.getSize(), 2);
@@ -46,39 +48,39 @@ import assert from 'assert';
   // assert.deepEqual( myTree.getDepthByKey('undefind'), -1);
   //  myTree.printTree()
 
-  console.log('test remove');
-   myTree.removeNodeByKey(grandChild22);
-  // assert.deepEqual( myTree.getSize(), 6);
-  //  myTree.printTree()
-
-   myTree.removeNodeByKey(child1);
-  // assert.deepEqual( myTree.getSize(), 3);
-  //  myTree.printTree()
-
-  console.log('test add child failed due to parent not found');
-   myTree.addChild(child1, grandChild11);
-  // assert.deepEqual( myTree.getSize(), 3);
-
-  console.log('test add child failed due to depth');
-
-   myTree.addChild(root, grandChild22);
-  // assert.deepEqual( myTree.getSize(), 4);
-   myTree.addChild(root, grandChild21);
-  //  myTree.printTree()
-  // assert.deepEqual( myTree.getSize(), 4);
-
-  console.log('test add child depth deeper');
-  const oldDepth =  myTree.getDepthByKey(child2);
-  // assert.deepEqual(oldDepth, 1);
-   myTree.addChild(grandChild22, child2);
-  const newDepth =  myTree.getDepthByKey(child2);
-  // assert.deepEqual(newDepth, 2);
-
-  console.log('test getMaxChildNumber');
-
-  // assert.deepEqual( myTree.getMaxChildNumber(), 1);
-   myTree.addChild(grandChild22, child1);
-  // assert.deepEqual( myTree.getMaxChildNumber(), 2);
+  // console.log('test remove');
+  //  myTree.removeNodeByKey(grandChild22);
+  // // assert.deepEqual( myTree.getSize(), 6);
+  // //  myTree.printTree()
+  //
+  //  myTree.removeNodeByKey(child1);
+  // // assert.deepEqual( myTree.getSize(), 3);
+  // //  myTree.printTree()
+  //
+  // console.log('test add child failed due to parent not found');
+  //  myTree.addChild(child1, grandChild11);
+  // // assert.deepEqual( myTree.getSize(), 3);
+  //
+  // console.log('test add child failed due to depth');
+  //
+  //  myTree.addChild(root, grandChild22);
+  // // assert.deepEqual( myTree.getSize(), 4);
+  //  myTree.addChild(root, grandChild21);
+  // //  myTree.printTree()
+  // // assert.deepEqual( myTree.getSize(), 4);
+  //
+  // console.log('test add child depth deeper');
+  // const oldDepth =  myTree.getDepthByKey(child2);
+  // // assert.deepEqual(oldDepth, 1);
+  //  myTree.addChild(grandChild22, child2);
+  // const newDepth =  myTree.getDepthByKey(child2);
+  // // assert.deepEqual(newDepth, 2);
+  //
+  // console.log('test getMaxChildNumber');
+  //
+  // // assert.deepEqual( myTree.getMaxChildNumber(), 1);
+  //  myTree.addChild(grandChild22, child1);
+  // // assert.deepEqual( myTree.getMaxChildNumber(), 2);
 
   console.log('test caculateIndex');
    myTree.caculateIndex();

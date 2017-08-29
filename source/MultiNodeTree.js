@@ -5,14 +5,12 @@ import MyLinkList from './MyLinkList';
 
 
 export default class MultiNodeTree {
-  constructor() {
+  constructor(key) {
     this.tree = new SymbolTree();
-    this.parent = {
-      key: 'prependChild'
-    };
+    this.root = { key };
     this.myMap = new Map();
-    this.indexMap = new Map();
-    //this.TreeArray = this.tree.treeToArray(this.root);
+    this.objMap = new Map();
+    this.objMap.set(key, this.root);
   }
   static printTest() {
     console.log('MultiNodeTree printTest');
@@ -71,16 +69,6 @@ export default class MultiNodeTree {
     this.caculateIndex();
     //  this.printTree();
     return this.getTreeArr();
-  }
-
-
-  setRoot(key) {
-    let root = {
-      key: key
-    }
-    this.root = root;
-    this.myMap.set(root.key, 0);
-    this.tree.prependChild(this.parent, root);
   }
 
   getRoot() {
