@@ -8,7 +8,8 @@ export default class MultiNodeTree {
   constructor(key) {
     this.tree = new SymbolTree();
     this.root = { key };
-    this.myMap = new Map();
+    this.depMap = new Map();
+    this.depMap.set(key, 0);
     this.objMap = new Map();
     this.objMap.set(key, this.root);
   }
@@ -77,39 +78,28 @@ export default class MultiNodeTree {
 
   addChild(parent, child) {
 
+    const nodeParent = this.objMap.get(parent);
+    let nodeChild = this.objMap.get(child);
+
     if (typeof parent != "string") {
       throw new TypeError('getNodeByKey typeof parent != string')
+    } else if (!nodeParent) {
+      throw new Error('no parent found!!');
     }
     if (typeof child != "string") {
       throw new TypeError('getNodeByKey typeof child != string')
-    }
-    let pKey = {
-      key: parent
-    };
-    let cKey = {
-      key: child
-    };
-    let nodeParent = this.getNodeByKey(parent);
-    if (nodeParent == null) {
-      console.log('nodeParent==null');
-      return;
+    } else if (nodeChild) {
+      throw new Error('duplicated child');
     }
 
-    let nodeOldParent = this.getParentByKey(child);
-    if (nodeOldParent != null && nodeParent != null) {
+    nodeChild = {
+      key: child,
+    };
 
-      let nodeParentDepth = this.getDepthByKey(nodeParent.key);
-      let nodeOldParentDepth = this.getDepthByKey(nodeOldParent.key);
-      if (nodeOldParentDepth >= nodeParentDepth) {
-        return;
-      } else {
-        this.removeNodeByKey(child);
-      }
-    }
-    let dep = this.getDepthByKey(pKey.key) + 1;
-    this.myMap.set(cKey.key, dep)
-    this.tree.appendChild(nodeParent, cKey);
-    let parent1 = this.tree.parent(cKey);
+    const dep = this.depMap.get(parent) + 1;
+    this.depMap.set(child, dep);
+    this.tree.appendChild(nodeParent, nodeChild);
+    this.objMap.set(child, nodeChild);
   }
 
   removeNodeByKey(key) {
@@ -134,31 +124,15 @@ export default class MultiNodeTree {
     return result;
   }
 
-  getDepthByKey(key) {
-    let node = this.getNodeByKey(key);
-    if (node == null) return -1;
-    return this.myMap.get(node.key);
-  }
-  setDepthByKey(key, d) {
-    //let node =  this.getNodeByKey(key);
-    //if(node==null) return -1;
-    return this.myMap.set(key, d);
-  }
-
   getIndexByKey(key) {
     let node = this.getNodeByKey(key);
     if (node == null) return -1;
     return this.indexMap.get(node.key);
   }
 
-  getParentIndexByKey(key) {
-    let node = this.getParentByKey(key);
-    if (node == null) {
-      //runtime error
-      return -1;
-    }
-    const indexOfParent = this.indexMap.get(node.key)
-    return indexOfParent;
+  getParentNode(key) {
+    const {tree, objMap} = this;
+    return tree.parent(objMap.get(key));
   }
 
   getMyOrderByKey(key) {
@@ -231,9 +205,9 @@ export default class MultiNodeTree {
     this.TreeArray = this.tree.treeToArray(this.root);
     this.printArr(this.TreeArray);
   }
+
   getSize() {
-    this.TreeArray = this.tree.treeToArray(this.root);
-    return this.TreeArray.length;
+    return this.tree.treeToArray(this.root).length;
   }
 
   getTreeArr() {
@@ -249,7 +223,7 @@ export default class MultiNodeTree {
       arr2.push({
         parent: pkey,
         key,
-        depth: this.myMap.get(key),
+        depth: this.depMap.get(key),
         index,
       });
     }
@@ -268,7 +242,7 @@ export default class MultiNodeTree {
       console.log({
         parent: pkey,
         key: key,
-        depth: this.myMap.get(key),
+        depth: this.depMap.get(key),
         index: index
       });
     }

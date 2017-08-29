@@ -3,10 +3,9 @@ import assert from 'assert';
 
  function testMain() {
   console.log('step0');
-  const root = 'root';
-  const myTree = new MultiNodeTree(root);
-  console.log(myTree)
-return;
+  const Root = 'Root';
+  const myTree = new MultiNodeTree(Root);
+
   const child1 = 'child1';
   const child2 = 'child2';
   const grandChild11 = 'grandChild11';
@@ -14,26 +13,29 @@ return;
   const grandChild21 = 'grandChild21';
   const grandChild22 = 'grandChild22';
 
-  // assert.deepEqual( myTree.getSize(), 1);
-  myTree.addChild(root, child1);
-  // assert.deepEqual( myTree.getSize(), 2);
-  myTree.addChild(root, child2);
-  // assert.deepEqual( myTree.getSize(), 3);
+  assert.deepEqual( myTree.getSize(), 1);
+  myTree.addChild(Root, child1);
+
+  assert.deepEqual( myTree.getSize(), 2);
+  myTree.addChild(Root, child2);
+  assert.deepEqual( myTree.getSize(), 3);
 
   console.log('step1');
   myTree.addChild(child1, grandChild11);
   myTree.addChild(child1, grandChild12);
-  const ParentOfgrandChild11 =  myTree.getParentByKey(grandChild11);
-  const ParentOfgrandChild12 =  myTree.getParentByKey(grandChild12);
-  // assert.deepEqual(ParentOfgrandChild11.key, child1);
-  // assert.deepEqual(ParentOfgrandChild12.key, child1);
-  // assert.deepEqual( myTree.getDepthByKey(root), 0);
-  // assert.deepEqual( myTree.getDepthByKey(child1), 1);
-  // assert.deepEqual( myTree.getDepthByKey(child2), 1);
-  // assert.deepEqual( myTree.getSize(), 5);
+
+  const ParentOfgrandChild11 =  myTree.getParentNode(grandChild11);
+  const ParentOfgrandChild12 =  myTree.getParentNode(grandChild12);
+  assert.deepEqual(ParentOfgrandChild11.key, child1);
+  assert.deepEqual(ParentOfgrandChild12.key, child1);
+  assert.deepEqual( myTree.depMap.get(Root), 0);
+  assert.deepEqual( myTree.depMap.get(child1), 1);
+  assert.deepEqual( myTree.depMap.get(child2), 1);
+  assert.deepEqual( myTree.getSize(), 5);
+
   console.log('step2');
-   myTree.addChild(child2, grandChild21);
-   myTree.addChild(child2, grandChild22);
+  myTree.addChild(child2, grandChild21);
+  myTree.addChild(child2, grandChild22);
   const ParentOfgrandChild21 =  myTree.getParentByKey(grandChild21);
   const ParentOfgrandChild22 =  myTree.getParentByKey(grandChild22);
   // assert.deepEqual(ParentOfgrandChild21.key, child2);
@@ -63,9 +65,9 @@ return;
   //
   // console.log('test add child failed due to depth');
   //
-  //  myTree.addChild(root, grandChild22);
+  //  myTree.addChild(Root, grandChild22);
   // // assert.deepEqual( myTree.getSize(), 4);
-  //  myTree.addChild(root, grandChild21);
+  //  myTree.addChild(Root, grandChild21);
   // //  myTree.printTree()
   // // assert.deepEqual( myTree.getSize(), 4);
   //
