@@ -2,7 +2,7 @@ import MultiNodeTree from './index';
 import assert from 'assert';
 
  function testMain() {
-  console.log('step 0');
+  console.log('step0');
   const myTree = new MultiNodeTree();
   const root = 'root';
   const child1 = 'child1';
@@ -11,16 +11,16 @@ import assert from 'assert';
   const grandChild12 = 'grandChild12';
   const grandChild21 = 'grandChild21';
   const grandChild22 = 'grandChild22';
-   myTree.setRoot(root);
+  myTree.setRoot(root);
   assert.deepEqual( myTree.getSize(), 1);
-   myTree.addChild(root, child1);
+  myTree.addChild(root, child1);
   assert.deepEqual( myTree.getSize(), 2);
-   myTree.addChild(root, child2);
+  myTree.addChild(root, child2);
   assert.deepEqual( myTree.getSize(), 3);
 
   console.log('step1');
-   myTree.addChild(child1, grandChild11);
-   myTree.addChild(child1, grandChild12);
+  myTree.addChild(child1, grandChild11);
+  myTree.addChild(child1, grandChild12);
   const ParentOfgrandChild11 =  myTree.getParentByKey(grandChild11);
   const ParentOfgrandChild12 =  myTree.getParentByKey(grandChild12);
   assert.deepEqual(ParentOfgrandChild11.key, child1);
@@ -79,7 +79,7 @@ import assert from 'assert';
   assert.deepEqual( myTree.getMaxChildNumber(), 1);
    myTree.addChild(grandChild22, child1);
   assert.deepEqual( myTree.getMaxChildNumber(), 2);
-  
+
   console.log('test caculateIndex');
    myTree.caculateIndex();
    myTree.printTree();
@@ -236,4 +236,4 @@ import assert from 'assert';
 }
 
 testMain();
-testMain2();
+// testMain2();

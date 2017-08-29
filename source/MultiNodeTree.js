@@ -73,59 +73,6 @@ export default class MultiNodeTree {
     return this.getTreeArr();
   }
 
-  static buildTree2(arr) {
-    const myList = new MyLinkList();
-
-    Promise.all(arr.map((e) => {
-      myList.insert(e.id);
-    }));
-    Promise.all(arr.map((e) => {
-      myList.removeNode(e.sub);
-    }));
-
-
-    const {
-      data,
-    } = myList.getHeadNode();
-
-    const myTree = new MultiNodeTree();
-    myTree.setRoot(data);
-    const root = myTree.getRoot();
-
-    const stack = [];
-    stack.push(root);
-
-    Promise.all(arr.map((e) => {
-      let {
-        id,
-        sub,
-      } = e;
-      if (id === root.key) {
-        stack.push(sub);
-        myTree.addChild(id, sub);
-      }
-    }));
-
-
-    //  myTree.printTree();
-    while (stack.length > 0) {
-      const node = stack.pop();
-      Promise.all(arr.map((e) => {
-        let {
-          id,
-          sub,
-        } = e;
-        if (id === node) {
-          stack.push(sub);
-          myTree.addChild(node, sub);
-        }
-      }));
-
-    }
-    myTree.caculateIndex();
-    //  myTree.printTree();
-    return myTree.getTreeArr();
-  }
 
   setRoot(key) {
     let root = {
@@ -141,7 +88,7 @@ export default class MultiNodeTree {
   }
 
   addChild(parent, child) {
-    
+
     if (typeof parent != "string") {
       throw new TypeError('getNodeByKey typeof parent != string')
     }
@@ -159,7 +106,7 @@ export default class MultiNodeTree {
       console.log('nodeParent==null');
       return;
     }
-    
+
     let nodeOldParent = this.getParentByKey(child);
     if (nodeOldParent != null && nodeParent != null) {
 
