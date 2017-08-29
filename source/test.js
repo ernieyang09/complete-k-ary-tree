@@ -36,18 +36,19 @@ import assert from 'assert';
   console.log('step2');
   myTree.addChild(child2, grandChild21);
   myTree.addChild(child2, grandChild22);
-  const ParentOfgrandChild21 =  myTree.getParentByKey(grandChild21);
-  const ParentOfgrandChild22 =  myTree.getParentByKey(grandChild22);
-  // assert.deepEqual(ParentOfgrandChild21.key, child2);
-  // assert.deepEqual( myTree.getDepthByKey(ParentOfgrandChild21.key), 1);
-  // assert.deepEqual( myTree.getDepthByKey(grandChild21), 2);
-  // assert.deepEqual(ParentOfgrandChild22.key, child2);
-  // assert.deepEqual( myTree.getDepthByKey(ParentOfgrandChild22.key), 1);
-  // assert.deepEqual( myTree.getDepthByKey(grandChild22), 2);
-  // assert.deepEqual( myTree.getSize(), 7);
+  const ParentOfgrandChild21 =  myTree.getParentNode(grandChild21);
+  const ParentOfgrandChild22 =  myTree.getParentNode(grandChild22);
+  assert.deepEqual(ParentOfgrandChild21.key, child2);
+  assert.deepEqual( myTree.depMap.get(ParentOfgrandChild21.key), 1);
+  assert.deepEqual( myTree.depMap.get(grandChild21), 2);
+  assert.deepEqual(ParentOfgrandChild22.key, child2);
+  assert.deepEqual( myTree.depMap.get(ParentOfgrandChild22.key), 1);
+  assert.deepEqual( myTree.depMap.get(grandChild22), 2);
+  assert.deepEqual( myTree.getSize(), 7);
+
   console.log('step3');
 
-  // assert.deepEqual( myTree.getDepthByKey('undefind'), -1);
+  // assert.deepEqual( myTree.depMap.get('undefind'), -1);
   //  myTree.printTree()
 
   // console.log('test remove');
@@ -72,10 +73,10 @@ import assert from 'assert';
   // // assert.deepEqual( myTree.getSize(), 4);
   //
   // console.log('test add child depth deeper');
-  // const oldDepth =  myTree.getDepthByKey(child2);
+  // const oldDepth =  myTree.depMap.get(child2);
   // // assert.deepEqual(oldDepth, 1);
   //  myTree.addChild(grandChild22, child2);
-  // const newDepth =  myTree.getDepthByKey(child2);
+  // const newDepth =  myTree.depMap.get(child2);
   // // assert.deepEqual(newDepth, 2);
   //
   // console.log('test getMaxChildNumber');
@@ -85,8 +86,8 @@ import assert from 'assert';
   // // assert.deepEqual( myTree.getMaxChildNumber(), 2);
 
   console.log('test caculateIndex');
-   myTree.caculateIndex();
-   myTree.printTree();
+  myTree.caculateIndex();
+  // myTree.printTree();
 }
 
  function testMain2() {

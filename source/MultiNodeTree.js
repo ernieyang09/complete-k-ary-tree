@@ -17,64 +17,64 @@ export default class MultiNodeTree {
     console.log('MultiNodeTree printTest');
   }
 
-  buildTree(arr) {
-    const myList = new MyLinkList();
-
-    Promise.all(arr.map((e) => {
-      myList.insert(e.id);
-    }));
-    Promise.all(arr.map((e) => {
-      myList.removeNode(e.sub);
-    }));
-
-
-    const {
-      data,
-    } = myList.getHeadNode();
-
-    const myTree = new MultiNodeTree();
-    this.setRoot(data);
-    const root = this.getRoot();
-
-    const stack = [];
-    stack.push(root);
-
-    Promise.all(arr.map((e) => {
-      let {
-        id,
-        sub,
-      } = e;
-      if (id === root.key) {
-        stack.push(sub);
-        this.addChild(id, sub);
-      }
-    }));
-
-
-    //  this.printTree();
-    while (stack.length > 0) {
-      // console.log('stack.length '+stack.length);
-      const node = stack.pop();
-      Promise.all(arr.map((e) => {
-        let {
-          id,
-          sub,
-        } = e;
-        if (id === node) {
-          stack.push(sub);
-          this.addChild(node, sub);
-        }
-      }));
-
-    }
-    this.caculateIndex();
-    //  this.printTree();
-    return this.getTreeArr();
-  }
-
-  getRoot() {
-    return this.tree.firstChild(this.parent);
-  }
+  // buildTree(arr) {
+  //   const myList = new MyLinkList();
+  //
+  //   Promise.all(arr.map((e) => {
+  //     myList.insert(e.id);
+  //   }));
+  //   Promise.all(arr.map((e) => {
+  //     myList.removeNode(e.sub);
+  //   }));
+  //
+  //
+  //   const {
+  //     data,
+  //   } = myList.getHeadNode();
+  //
+  //   const myTree = new MultiNodeTree();
+  //   this.setRoot(data);
+  //   const root = this.getRoot();
+  //
+  //   const stack = [];
+  //   stack.push(root);
+  //
+  //   Promise.all(arr.map((e) => {
+  //     let {
+  //       id,
+  //       sub,
+  //     } = e;
+  //     if (id === root.key) {
+  //       stack.push(sub);
+  //       this.addChild(id, sub);
+  //     }
+  //   }));
+  //
+  //
+  //   //  this.printTree();
+  //   while (stack.length > 0) {
+  //     // console.log('stack.length '+stack.length);
+  //     const node = stack.pop();
+  //     Promise.all(arr.map((e) => {
+  //       let {
+  //         id,
+  //         sub,
+  //       } = e;
+  //       if (id === node) {
+  //         stack.push(sub);
+  //         this.addChild(node, sub);
+  //       }
+  //     }));
+  //
+  //   }
+  //   this.caculateIndex();
+  //   //  this.printTree();
+  //   return this.getTreeArr();
+  // }
+  //
+  // getRoot() {
+  //   return this.tree.firstChild(this.parent);
+  // }
 
   addChild(parent, child) {
 
@@ -102,61 +102,52 @@ export default class MultiNodeTree {
     this.objMap.set(child, nodeChild);
   }
 
-  removeNodeByKey(key) {
-    let node = this.getNodeByKey(key);
-    if (node != null) {
-      this.tree.remove(node);
-    }
-  }
-  getNodeByKey(key) {
-    let result = null;
-    if (typeof key != "string") {
-      throw new TypeError('getNodeByKey typeof key != string')
-    }
+  // removeNodeByKey(key) {
+  //   let node = this.getNodeByKey(key);
+  //   if (node != null) {
+  //     this.tree.remove(node);
+  //   }
+  // }
+  // getNodeByKey(key) {
+  //   let result = null;
+  //   if (typeof key != "string") {
+  //     throw new TypeError('getNodeByKey typeof key != string')
+  //   }
+  //
+  //   this.TreeArray = this.tree.treeToArray(this.root);
+  //   for (let i = 0; i < this.TreeArray.length; i++) {
+  //     if (this.TreeArray[i].key == key) {
+  //       result = this.TreeArray[i];
+  //       break;
+  //     }
+  //   }
+  //   return result;
+  // }
+  //
+  // getIndexByKey(key) {
+  //   let node = this.getNodeByKey(key);
+  //   if (node == null) return -1;
+  //   return this.indexMap.get(node.key);
+  // }
 
-    this.TreeArray = this.tree.treeToArray(this.root);
-    for (let i = 0; i < this.TreeArray.length; i++) {
-      if (this.TreeArray[i].key == key) {
-        result = this.TreeArray[i];
-        break;
-      }
-    }
-    return result;
-  }
-
-  getIndexByKey(key) {
-    let node = this.getNodeByKey(key);
-    if (node == null) return -1;
-    return this.indexMap.get(node.key);
-  }
-
-  getParentNode(key) {
-    const {tree, objMap} = this;
-    return tree.parent(objMap.get(key));
-  }
-
-  getMyOrderByKey(key) {
-    let node = this.getParentByKey(key);
-
-    if (node == null) {
-      return -1;
-    }
-    const childrenArray = this.tree.childrenToArray(node);
-    let myOrder = 0;
-    let counter = 0;
-    childrenArray.forEach(j => {
-
-      if (j.key == key) {
-        myOrder = counter;
-      }
-      counter++;
-    })
-    return myOrder;
-  }
-
-  setIndexByKey(key, d) {
-    this.indexMap.set(key, d);
-  }
+  // getMyOrderByKey(key) {
+  //   let node = this.getParentByKey(key);
+  //
+  //   if (node == null) {
+  //     return -1;
+  //   }
+  //   const childrenArray = this.tree.childrenToArray(node);
+  //   let myOrder = 0;
+  //   let counter = 0;
+  //   childrenArray.forEach(j => {
+  //
+  //     if (j.key == key) {
+  //       myOrder = counter;
+  //     }
+  //     counter++;
+  //   })
+  //   return myOrder;
+  // }
 
   getMaxChildNumber() {
     this.TreeArray = this.tree.treeToArray(this.root);
@@ -170,81 +161,85 @@ export default class MultiNodeTree {
 
   caculateIndex() {
     var childMax = this.getMaxChildNumber();
-    this.TreeArray = this.tree.treeToArray(this.root);
+    const indexMap = new Map();
 
-    var rootNode = this.TreeArray[0];
-    this.setIndexByKey(rootNode.key, 0);
+    const TreeArray = this.tree.treeToArray(this.root);
+
+    const rootNode = this.TreeArray[0];
+    indexMap.set(rootNode.key, 0);
+
     for (var j of this.tree.treeIterator(rootNode)) {
-      if (this.getIndexByKey(j.key) == 0) {
+      if (indexMap.get(j.key) == 0) {
         continue;
       }
       var previousSibling = this.tree.previousSibling(j);
       if (previousSibling) {
-        var psIndex = this.getIndexByKey(previousSibling.key)
-        this.setIndexByKey(j.key, psIndex + 1);
+        var psIndex = indexMap.get(previousSibling.key)
+        indexMap.set(j.key, psIndex + 1);
         continue;
       }
       var order = 0;
-
-      var parentIndex = this.getParentIndexByKey(j.key);
+      const parent = this.tree.parent(j);
+      const parentIndex = indexMap.get(parent.key);
       var myIndex = parentIndex * childMax + 1 + order;
       order = order + 1;
-      this.setIndexByKey(j.key, myIndex);
+      indexMap.set(j.key, myIndex);
     }
+    console.log(indexMap)
   }
 
-  getParentByKey(key) {
-    let node = this.getNodeByKey(key);
-
-
-    if (node == null) return null;
-    return this.tree.parent(node)
-  }
-  printTree() {
-    console.log('printTree');
-    this.TreeArray = this.tree.treeToArray(this.root);
-    this.printArr(this.TreeArray);
+  getParentNode(key) {
+    const {tree, objMap} = this;
+    return tree.parent(objMap.get(key));
   }
 
   getSize() {
     return this.tree.treeToArray(this.root).length;
   }
 
-  getTreeArr() {
-    const arr2 = [];
-    const arr = this.tree.treeToArray(this.root);
-    for (let i = 0; i < arr.length; i++) {
-      const key = arr[i].key;
-      const node = this.getNodeByKey(key);
-      const index = this.getIndexByKey(key);
-      const parent = this.getParentByKey(key);
-      let pkey = '0';
-      if (parent) pkey = parent.key;
-      arr2.push({
-        parent: pkey,
-        key,
-        depth: this.depMap.get(key),
-        index,
-      });
-    }
-    return arr2;
-  }
 
 
-  printArr(arr) {
-    for (let i = 0; i < arr.length; i++) {
-      let key = arr[i].key;
-      let node = this.getNodeByKey(key)
-      let index = this.getIndexByKey(key)
-      let parent = this.getParentByKey(key);
-      let pkey = '0';
-      if (parent) pkey = parent.key;
-      console.log({
-        parent: pkey,
-        key: key,
-        depth: this.depMap.get(key),
-        index: index
-      });
-    }
+
+  // getTreeArr() {
+  //   const arr2 = [];
+  //   const arr = this.tree.treeToArray(this.root);
+  //   for (let i = 0; i < arr.length; i++) {
+  //     const key = arr[i].key;
+  //     const node = this.getNodeByKey(key);
+  //     const index = this.getIndexByKey(key);
+  //     const parent = this.getParentByKey(key);
+  //     let pkey = '0';
+  //     if (parent) pkey = parent.key;
+  //     arr2.push({
+  //       parent: pkey,
+  //       key,
+  //       depth: this.depMap.get(key),
+  //       index,
+  //     });
+  //   }
+  //   return arr2;
+  // }
+
+  printTree() {
+    console.log('printTree');
+    this.TreeArray = this.tree.treeToArray(this.root);
+    this.printArr(this.TreeArray);
   }
+
+  // printArr(arr) {
+  //   for (let i = 0; i < arr.length; i++) {
+  //     let key = arr[i].key;
+  //     let node = this.getNodeByKey(key)
+  //     let index = this.getIndexByKey(key)
+  //     let parent = this.getParentByKey(key);
+  //     let pkey = '0';
+  //     if (parent) pkey = parent.key;
+  //     console.log({
+  //       parent: pkey,
+  //       key: key,
+  //       depth: this.depMap.get(key),
+  //       index: index
+  //     });
+  //   }
+  // }
 }
