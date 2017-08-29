@@ -174,15 +174,15 @@ export default class MultiNodeTree {
       }
       var previousSibling = this.tree.previousSibling(j);
       if (previousSibling) {
-        var psIndex = indexMap.get(previousSibling.key)
+        var psIndex = indexMap.get(previousSibling.key);
         indexMap.set(j.key, psIndex + 1);
         continue;
       }
-      var order = 0;
+
       const parent = this.tree.parent(j);
       const parentIndex = indexMap.get(parent.key);
-      var myIndex = parentIndex * childMax + 1 + order;
-      order = order + 1;
+      const myIndex = parentIndex * childMax + 1;
+
       indexMap.set(j.key, myIndex);
     }
     console.log(indexMap)
